@@ -3,12 +3,17 @@
 Usage
 npm install
 
-Start
+# Start
+
+```bash
+npm install
 npm run dev
-
 visit http://localhost:8080/#/
+```
 
-Build
+# Build
+```bash
 npm run build
+```
 
 author blog address www.sipeng.net
