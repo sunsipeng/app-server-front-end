@@ -1,10 +1,6 @@
 # app-server-front-end
 
-Usage
-npm install
-
-# Start
-
+# Usage
 ```bash
 npm install
 npm run dev
