@@ -52,7 +52,7 @@ define(function(require, exports, module) {
             leader:"chancy"
         },
         isSign:false,
-        weatherURL:"http://api.openweathermap.org/data/2.5/weather?appid=fe836a0e77d6a422617df27e259c667d&q=wenzhou&units=metric&lang=zh_cn",
+        weatherURL:"http://api.openweathermap.org/data/2.5/weather?appid=fe836a0e77d6a422617df27e259c667d&q=dongtou&units=metric&lang=zh_cn",
         getInitDataURL: config.interfaceHost + "/rest/gatemsg/initGateMessage.jo",
         weatherIconURL: 'http://openweathermap.org/img/w/{0}.png',
         winDegConf:["北","东北","东","东南","南","西南","西","西北"],
