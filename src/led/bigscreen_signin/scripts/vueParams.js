@@ -56,7 +56,7 @@ define(function(require, exports, module) {
         getInitDataURL: config.interfaceHost + "/rest/gatemsg/initGateMessage.jo",
         weatherIconURL: 'http://openweathermap.org/img/w/{0}.png',
         winDegConf:["北","东北","东","东南","南","西南","西","西北"],
-        simulateData: config.simulateData,
+        simulateData: {},
         simulateSignData:{
             "userId": 238,
             "orgName": "一号拌合站",
