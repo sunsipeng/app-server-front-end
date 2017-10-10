@@ -3,6 +3,8 @@ var htmlmin = require('gulp-htmlmin');
 var uglify = require('gulp-uglify');
 var cssmin = require('gulp-minify-css');
 var del = require('del');
+var rename = require("gulp-rename");
+var isDev = process.env.NODE_ENV == 'develop';
 gulp.task('clean', function () {
     del.sync([
         'build/**/*',
@@ -25,9 +27,16 @@ gulp.task('htmlmin', function () {
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
     };
-    gulp.src('./*.html')
+    if (isDev) {
+      gulp.src('./index.html')
+        .pipe(rename("./index_test.html"))
         .pipe(htmlmin(options))
         .pipe(gulp.dest('build/'));
+    } else {
+        gulp.src('./index.html')
+        .pipe(htmlmin(options))
+        .pipe(gulp.dest('build/'));
+    }
 });
 
 gulp.task('cssmin', function () {

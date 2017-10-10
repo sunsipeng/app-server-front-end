@@ -1,5 +1,4 @@
 define(function(require, exports, module) {
-    var config = require('./config.js');
     module.exports = {
         title: "",
         tipMessage:"",

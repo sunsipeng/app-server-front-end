@@ -2,7 +2,6 @@ define(function(require, exports, module) {
 	var Vue = require('./scripts/vue.js');
 	require('./scripts/jquery.liMarquee.js');
 	require('./scripts/mqttws31.min.js');
-	var config = require('./scripts/config.js');
 	var util = require('./scripts/util.js');
 	var vueParams = require('./scripts/vueParams.js');
 	var bigScreenVm = new Vue({
@@ -255,28 +254,18 @@ define(function(require, exports, module) {
 			peopleListScroll: function(){
 				this.calcPeopleScrollLandscapeWidth();
 				setTimeout(function() {
-					/**
-					 * if(this.peopleLongitudinalList.length > 3) {
-					 *  this.S('#peopleScrollLongitudinal').liMarquee({ direction: 'up',scrollamount: this.scrollTime,hoverstop: false});
-					 * 	this.peopleListLongitudinalScrollIsOpen = true;
-					 * }
-					 */
+					//是否需要滚动竖向人员列表
 					// this.S('#peopleScrollLongitudinal').liMarquee({ direction: 'up',scrollamount: this.scrollTime,hoverstop: false});
 					if(this.peopleLongitudinalList.length > 3) {
 					 	this.S('#peopleScrollLongitudinal').liMarquee({ direction: 'up',scrollamount: this.scrollTime,hoverstop: false});
 						this.peopleListLongitudinalScrollIsOpen = true;
 					}		
-					/**
-					 * if(this.peopleScrollLandscapeWidth > 558) {
-					 *  this.S('#peopleScrollLandscape').liMarquee({ scrollamount: this.scrollTime,hoverstop: false});
-					 *  this.peopleListLandscapeScrollIsOpen = true;
-					 * }
-					 */		
+					//是否需要滚动横向人员列表		
+					// this.S('#peopleScrollLandscape').liMarquee({ scrollamount: this.scrollTime,hoverstop: false});
 					if(this.peopleScrollLandscapeWidth > 558) {
 						this.S('#peopleScrollLandscape').liMarquee({ scrollamount: this.scrollTime,hoverstop: false});
 						this.peopleListLandscapeScrollIsOpen = true;
 					}
-					// this.S('#peopleScrollLandscape').liMarquee({ scrollamount: this.scrollTime,hoverstop: false});
 					this.S('#approachPeopleWrapper').liMarquee({ direction: 'up',scrollamount: this.scrollTime,hoverstop: false});
 					if(this.tipMessage.length*17 > 486) {
 						this.S('#promptContentWrapper').liMarquee({ scrollamount: this.scrollTime,hoverstop: false});
@@ -300,13 +289,6 @@ define(function(require, exports, module) {
 				this.S('#peopleScrollLongitudinal').liMarquee('update');
 				this.recordNewSign.push({type:'Longitudinal',orgId:this.specialPeopleConf[signData.orgType] ? signData.orgType : signData.orgId});
 				//判断是否需要滚动竖向人员数据
-				/**
-				 * if((this.peopleLongitudinalList.length++ ) > 3) {
-				 *  if(!this.peopleListLandscapeScrollIsOpen){
-				 *   this.S('#peopleScrollLongitudinal').liMarquee({ direction: 'up',scrollamount: this.scrollTime,hoverstop: false});
-				 *  }
-				 * }
-				 */	
 				if((++this.peopleLongitudinalList.length) > 3) {
 				 if(!this.peopleListLongitudinalScrollIsOpen){
 					this.S('#peopleScrollLongitudinal').liMarquee({ direction: 'up',scrollamount: this.scrollTime,hoverstop: false});
@@ -328,13 +310,6 @@ define(function(require, exports, module) {
 				this.S('#peopleScrollLandscape').liMarquee('update');
 
 				//判断是否需要滚动横向人员数据
-				/**
-				 * if(this.peopleScrollLandscapeWidth > 558) {
-				 *	if(!this.peopleListLandscapeScrollIsOpen){
-				 *	 this.S('#peopleScrollLandscape').liMarquee({ scrollamount: this.scrollTime,hoverstop: false}); 
-				 *	}		
-				 * }
-				 */
 				if(this.peopleScrollLandscapeWidth > 558) {
 					if(!this.peopleListLandscapeScrollIsOpen){
 					 this.S('#peopleScrollLandscape').liMarquee({ scrollamount: this.scrollTime,hoverstop: false}); 
