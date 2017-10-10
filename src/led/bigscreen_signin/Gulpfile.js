@@ -4,7 +4,21 @@ var uglify = require('gulp-uglify');
 var cssmin = require('gulp-minify-css');
 var del = require('del');
 var rename = require("gulp-rename");
-var isDev = process.env.NODE_ENV == 'develop';
+var htmlreplace = require('gulp-html-replace');
+// var connect = require('gulp-connect');
+// var copyfile = require('gulp-file-copy');
+var webserver = require('gulp-webserver');
+gulp.task('webserver-dev', function() {
+ gulp.src('build')
+   .pipe(webserver({
+     livereload: true,
+     directoryListing: false,
+     open: true,
+     path:'/',
+     fallback:'index.html'
+   }));
+});
+
 gulp.task('clean', function () {
     del.sync([
         'build/**/*',
@@ -18,7 +32,7 @@ gulp.task('script', function() {
         .pipe(gulp.dest('build/scripts'))
 });
 
-gulp.task('htmlmin', function () {
+gulp.task('htmlmin_production', function () {
     var options = {
         removeComments: true,
         collapseWhitespace: true,
@@ -27,16 +41,29 @@ gulp.task('htmlmin', function () {
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
     };
-    if (isDev) {
-      gulp.src('./index.html')
-        .pipe(rename("./index_test.html"))
-        .pipe(htmlmin(options))
-        .pipe(gulp.dest('build/'));
-    } else {
-        gulp.src('./index.html')
-        .pipe(htmlmin(options))
-        .pipe(gulp.dest('build/'));
-    }
+    gulp.src('./index.html')
+    .pipe(htmlreplace({
+        'js': 'scripts/config.js'
+    }))
+    .pipe(htmlmin(options))
+    .pipe(gulp.dest('build/'));
+});
+gulp.task('htmlmin_dev', function () {
+    var options = {
+        removeComments: true,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeEmptyAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+    };
+    gulp.src('./index.html')
+    .pipe(rename("./index_test.html"))
+    .pipe(htmlreplace({
+        'js': 'scripts/config_test.js'
+    }))
+    .pipe(htmlmin(options))
+    .pipe(gulp.dest('build/'));
 });
 
 gulp.task('cssmin', function () {
@@ -55,4 +82,4 @@ gulp.task('svg',function(){
 	.pipe(gulp.dest('build/svg'));
 })
 
-gulp.task('default',['clean','img','cssmin','script','htmlmin']);
+gulp.task('build',['clean','img','cssmin','script','htmlmin_production','htmlmin_dev']);
