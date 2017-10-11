@@ -7,6 +7,7 @@ var rename = require("gulp-rename");
 var htmlreplace = require('gulp-html-replace');
 // var connect = require('gulp-connect');
 // var copyfile = require('gulp-file-copy');
+var env = process.env.NODE_ENV == 'develop';
 var webserver = require('gulp-webserver');
 gulp.task('webserver-dev', function() {
  gulp.src('build')
@@ -28,7 +29,7 @@ gulp.task('clean', function () {
 gulp.task('script', function() {
     // 1. 找到文件
     gulp.src('scripts/*.js')
-		.pipe(uglify({ mangle: false }))
+		.pipe(uglify({ mangle: false, compress: true }))
         .pipe(gulp.dest('build/scripts'))
 });
 
