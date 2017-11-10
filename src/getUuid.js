@@ -1,6 +1,6 @@
 export function getUuid(){
-	var len=32;//32长度
-	var radix=16;//16进制
+	var len=32;
+	var radix=16;
 	var chars='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
 	var uuid=[],i;
 	radix = radix || chars.length;
